@@ -2,6 +2,7 @@ package songs;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.SQLContext;
 import org.springframework.context.annotation.*;
 
 /**
@@ -11,6 +12,13 @@ import org.springframework.context.annotation.*;
 @PropertySource("classpath:user.properties")
 @ComponentScan
 public class SpringConfig {
+
+    @Bean
+    public SQLContext sqlContext(){
+        SQLContext sqlContext = new SQLContext(sc());
+        return sqlContext;
+    }
+
     @Bean
     public SparkConf sparkConf(){
         SparkConf conf = new SparkConf();
